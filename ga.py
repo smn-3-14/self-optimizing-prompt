@@ -1,54 +1,110 @@
 import json
 import sys
-
-sys.path.append("./human-eval")
+import logging
 import re
 import random
+import traceback
 from itertools import combinations
 from pathlib import Path
+from tempfile import TemporaryDirectory
+from tenacity import retry, wait_exponential, after_log
 
+sys.path.append("./human-eval")
 from human_eval import data, execution
 from openai import OpenAI
+import requests
 import tqdm
 
 import settings
 
 # Define the problem-specific parameters
-GENE_LENGTH = 10  # Length of each individual (chromosome)
 POPULATION_SIZE = 20  # Number of individuals in the population
 GENERATIONS = 20  # Number of generations to run
 CROSSOVER_RATE = 0.6
 MUTATION_RATE = 0.4
 
 
+tmp_dir = TemporaryDirectory(delete=False)
+tmp_dir_path = Path(tmp_dir.name)
+logger = logging.getLogger("ga")
+logger.setLevel(logging.DEBUG)
+
+formatter = logging.Formatter("[%(levelname)s|%(asctime)s] %(message)s")
+
+# std = logging.StreamHandler(sys.stdout)
+# std.setLevel(logging.DEBUG)
+# std.setFormatter(formatter)
+# logger.addHandler(std)
+
+fh = logging.FileHandler(str((tmp_dir_path / "logs.txt").resolve()))
+fh.setLevel(logging.DEBUG)
+fh.setFormatter(formatter)
+logger.addHandler(fh)
+
 OPENAI_CLIENT = OpenAI(base_url=settings.OPENAI_BASE_URL)
+# HF_CLIENT = InferenceClient("google/gemma-2-2b-it", token=settings.TOKEN, timeout=15.0)
+
 
 def save(output, name):
-    output_file = Path(__file__).parent / name
+    output_file = Path(tmp_dir_path) / name
+    logger.info(f"Writing to {output_file.resolve()}")
 
     with output_file.open("a") as name:
         json.dump(output, name)
         name.write("\n")
 
-def _ask_model(msg: str):
-    # n has to stay 1 for this to work
-    return (
-        OPENAI_CLIENT.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": msg,
-                }
-            ],
-            model=settings.OPENAI_MODEL,
-        )
-        .choices[0]
-        .message.content
-    )
+@retry(wait=wait_exponential(multiplier=1, min=4, max=10), after=after_log(logger, logging.ERROR))
+def _ask_model(msg: str, max_new_tokens = 64, do_sample=False, top_p=None, temp=None):
+    try:
+        API_URL = "https://api-inference.huggingface.co/models/google/gemma-2-2b-it"
+        headers = {"Authorization": "Bearer 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", "x-use-cache": "false", "x-wait-for-model": "true"}
+
+        def query(payload):
+            response = requests.post(API_URL, headers=headers, json=payload, timeout=60)
+            return response.json()
+
+        params = {
+            "do_sample": do_sample,
+            "max_new_tokens": max_new_tokens,
+        }
+
+        if not top_p is None:
+            params["top_p"] = top_p
+
+        if not temp is None:
+            params["temperature"] = temp
+
+        output = query({
+            "inputs": msg,
+            "parameters": params,
+            "return_full_text": False,
+        })
+
+
+        response = output[0]["generated_text"].replace(msg, "")
+        # response = response.split("```")[0]
+
+        return response
+    except Exception as e:
+        logger.error(traceback.format_exc())
+        raise e from None
+
+
+    # return (
+    #     HF_CLIENT.text_generation(
+    #         msg,
+    #         top_p = top_p,
+    #         temperature=temp,
+    #         do_sample = do_sample,
+    #         max_new_tokens = max_new_tokens,
+    #     )
+    #     .choices[0]
+    #     .message.content
+    # )
 
 
 def initialize_population(population: list[str], training_data):
-    print("Generating population 1")
+    logger.info("Generating population 1")
 
     for _ in tqdm.tqdm(range(POPULATION_SIZE)):
         examples = random.sample(training_data, 10)
@@ -58,10 +114,10 @@ def initialize_population(population: list[str], training_data):
             prompt += f"task:{example["prompt"]}\nanswer:\n{example["canonical_solution"]}\n\n"
 
         prompt += (
-            "\n...\n The sentence that give instructions for solving these tasks is"
+            "\n...\n The sentence that gives a instruction for solving these kind of tasks is"
         )
 
-        response = _ask_model(prompt)
+        response = _ask_model(prompt, max_new_tokens=64, do_sample=True, top_p=0.95, temp=0.9)
         population.append(response)
 
 
@@ -77,15 +133,15 @@ def extract_first_python_code_block(text):
 
 
 def fitness_function(individual, test_data):
-    print("Collecting responses")
+    logger.info("Collecting responses")
     responses = {}
     for sample in tqdm.tqdm(test_data):
-        prompt = f"{individual}\n{sample["prompt"]}"
+        prompt = f"{sample["prompt"]}\n{individual}"
         responses[sample["task_id"]] = extract_first_python_code_block(
-            _ask_model(prompt)
+            _ask_model(prompt, max_new_tokens=200)
         )
 
-    print("Evaluating fitness")
+    logger.info("Evaluating fitness")
     success = 0
     for sample in tqdm.tqdm(test_data):
         result = execution.check_correctness(sample, responses[sample["task_id"]], 20.0)
@@ -95,8 +151,10 @@ def fitness_function(individual, test_data):
     return success / len(test_data)
 
 
-def selection(population, tournament_size=2):
+def selection(population, test_data, tournament_size=2):
     tournament = random.sample(population, tournament_size)
+    tournament = [i() for i in tournament]
+    tournament = [(i, fitness_function(i, test_data)) for i in tournament]
     return max(tournament, key=lambda x: x[1])
 
 
@@ -121,8 +179,9 @@ Expand and refine this poem, enhancing its tone, style, and imagery.
 """
     candidate1 = template.format(parents=parent1 + parent2)
     candidate2 = template.format(parents=parent2 + parent1)
+    child_source = random.sample([candidate1, candidate2], 1)[0]
 
-    return _ask_model(candidate1), _ask_model(candidate2)
+    return _ask_model(child_source, max_new_tokens=64, do_sample=True, top_p=0.95, temp=0.9)
 
 
 def mutate(individual):
@@ -145,11 +204,11 @@ She gave him a warm smile.
 ### after:
 """
 
-    return _ask_model(template.format(individual=individual))
+    return _ask_model(template.format(individual=individual), max_new_tokens=64, do_sample=True, top_p=0.95, temp=0.9)
 
 
 def split_data(data, train_ratio=0.2, val_ratio=0.2, test_ratio=0.6, seed=None):
-    print("Generating data splits")
+    logger.info("Generating data splits")
 
     keys = list(data.keys())
 
@@ -170,7 +229,7 @@ def split_data(data, train_ratio=0.2, val_ratio=0.2, test_ratio=0.6, seed=None):
     val_set = list(map(lambda k: data[k], val_keys))
     test_set = list(map(lambda k: data[k], test_keys))
 
-    print(f"Generated {len(train_set)} | {len(val_set)} | {len(test_set)}")
+    logger.info(f"Generated {len(train_set)} | {len(val_set)} | {len(test_set)}")
 
     return train_set, val_set, test_set
 
@@ -187,31 +246,31 @@ def run():
 
     initialize_population(population, train_set)
 
-    population = [(i, fitness_function(i, test_set)) for i in population]
+    logger.info("Evaluating first population")
+    population = [(i, fitness_function(i, val_set)) for i in population]
 
-    assert len(population) == POPULATION_SIZE
+    save(population, "population_0.json")
 
-    save(population, "populations.json")
+    for i in range(GENERATIONS):
+        assert len(population) == POPULATION_SIZE
 
-    print("Starting GA...")
-    g = 0
-    while g < tqdm.tqdm(GENERATIONS):
         population_next = []
         crossover_targets = [i for i in population if random.random() < CROSSOVER_RATE]
+        crossover_targets = [i for i in combinations(crossover_targets, 2)]
         mutation_targets = [i for i in population if random.random() < MUTATION_RATE]
 
-        print("Crossover...")
-        results = [y
-                   for x in tqdm.tqdm(combinations(crossover_targets))
-                   for y in crossover(x[0], x[1])]
-        print("Mutating...")
-        results += [mutate(i) for i in tqdm.tqdm(mutation_targets)]
-        results = [(i, fitness_function(i, test_set)) for i in results]
+        p = [lambda: i for i in population]
+        c = [lambda: crossover(i[0], i[1]) for i in crossover_targets]
+        m = [lambda: mutate(i) for i in mutation_targets]
 
-        for _ in range(POPULATION_SIZE - 1):
-            population_next.append(selection(results))
+        logger.info(f"Generatin population... {i + 1}")
+        for _ in tqdm.tqdm(range(POPULATION_SIZE - 1)):
+            population_next.append(selection(p + c + m, val_set))
         population_next.append(max(population, key=lambda x: x[1]))
 
-        save(population, "populations.json")
+        logger.info(
+            f"Max: {max(population_next, key=lambda x: x[1])[1]} | Min: {min(population_next, key=lambda x: x[1])[1]} | Avrg: {sum(map(lambda x: x[1], population_next)) / len(population_next)}"
+        )
+
         population = population_next
-        g += 1
+        save(population, f"population_{i + 1}.json")
