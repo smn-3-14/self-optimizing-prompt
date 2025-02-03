@@ -1,0 +1,118 @@
+[INFO|2025-02-01 04:34:37,981 | multiple_choice] Generated 63 | 7 | 12032
+[INFO|2025-02-01 04:34:37,981 | shared] Executing genetic algorithm
+[INFO|2025-02-01 04:34:37,981 | shared] Using
+[INFO|2025-02-01 04:34:37,981 | shared] Population size:	8
+[INFO|2025-02-01 04:34:37,981 | shared] Generations:	10
+[INFO|2025-02-01 04:34:37,981 | shared] Crossover rate:	8
+[INFO|2025-02-01 04:34:37,981 | shared] Mutation rate:	0.4
+[INFO|2025-02-01 04:34:37,981 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/train.json
+[INFO|2025-02-01 04:34:37,982 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/val.json
+[INFO|2025-02-01 04:34:37,982 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/test.json
+[INFO|2025-02-01 04:34:45,793 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:45,794 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:45,795 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:45,796 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:45,797 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:45,797 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:45,798 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:45,799 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:57,816 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/population_0.json
+[INFO|2025-02-01 04:34:57,818 | shared] Stats: 0.14285714285714285 | 0.017857142857142856 | 0.0
+[INFO|2025-02-01 04:34:58,636 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:58,636 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:58,677 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:58,709 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:34:58,749 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:05,364 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:10,818 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:20,021 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/population_1.json
+[INFO|2025-02-01 04:35:20,025 | shared] Stats: 0.14285714285714285 | 0.017857142857142856 | 0.0
+[INFO|2025-02-01 04:35:20,962 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:20,974 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:21,129 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:21,423 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:21,778 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:22,214 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:31,901 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/population_2.json
+[INFO|2025-02-01 04:35:31,905 | shared] Stats: 0.14285714285714285 | 0.05357142857142857 | 0.0
+[INFO|2025-02-01 04:35:32,777 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:32,779 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:32,787 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:32,853 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:33,024 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:33,658 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:40,115 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:47,079 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:57,641 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/population_3.json
+[INFO|2025-02-01 04:35:57,645 | shared] Stats: 0.14285714285714285 | 0.07142857142857142 | 0.0
+[INFO|2025-02-01 04:35:58,520 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:58,734 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:58,742 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:58,961 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:35:58,994 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:05,351 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:15,242 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/population_4.json
+[INFO|2025-02-01 04:36:15,245 | shared] Stats: 0.14285714285714285 | 0.10714285714285714 | 0.0
+[INFO|2025-02-01 04:36:16,121 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:16,122 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:16,124 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:16,151 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:16,314 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:16,425 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:26,240 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:28,910 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:37,493 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/population_5.json
+[INFO|2025-02-01 04:36:37,495 | shared] Stats: 0.14285714285714285 | 0.10714285714285714 | 0.0
+[INFO|2025-02-01 04:36:38,223 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:38,340 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:38,413 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:38,563 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:38,565 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:38,826 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:39,000 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:49,002 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:36:59,243 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/population_6.json
+[INFO|2025-02-01 04:36:59,246 | shared] Stats: 0.14285714285714285 | 0.125 | 0.0
+[INFO|2025-02-01 04:37:00,122 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:00,152 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:00,218 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:00,221 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:00,341 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:00,354 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:00,666 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:08,699 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:13,984 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:18,621 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:32,902 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/population_7.json
+[INFO|2025-02-01 04:37:32,905 | shared] Stats: 0.14285714285714285 | 0.10714285714285714 | 0.0
+[INFO|2025-02-01 04:37:33,646 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:33,781 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:33,783 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:34,223 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:34,660 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:47,435 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:55,630 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/population_8.json
+[INFO|2025-02-01 04:37:55,634 | shared] Stats: 0.14285714285714285 | 0.10714285714285714 | 0.0
+[INFO|2025-02-01 04:37:56,420 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:56,421 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:56,422 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:56,439 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:56,662 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:56,663 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:37:57,025 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:09,201 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:10,521 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:11,118 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:20,013 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/population_9.json
+[INFO|2025-02-01 04:38:20,016 | shared] Stats: 0.14285714285714285 | 0.10714285714285714 | 0.0
+[INFO|2025-02-01 04:38:20,713 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:20,736 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:20,832 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:20,859 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:20,955 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:21,079 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:29,661 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:30,647 | multiple_choice] Collecting responses
+[INFO|2025-02-01 04:38:39,786 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738380874_Q4XZipXj/population_10.json
+[INFO|2025-02-01 04:38:39,790 | shared] Final test
+[INFO|2025-02-01 04:38:39,790 | multiple_choice] Collecting responses

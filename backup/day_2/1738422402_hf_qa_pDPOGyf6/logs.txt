@@ -1,0 +1,12 @@
+[INFO|2025-02-01 16:06:42,344 | __main__] Running with args: {'uni': False, 'code': False, 'model': 'deepseek-ai/deepseek-vl-1.3b-chat'}
+[INFO|2025-02-01 16:06:42,344 | root] Running multiple choice challange with hf model deepseek-ai/deepseek-vl-1.3b-chat
+[INFO|2025-02-01 16:06:46,323 | multiple_choice] Generated 63 | 7 | 12032
+[INFO|2025-02-01 16:06:46,324 | shared] Executing genetic algorithm
+[INFO|2025-02-01 16:06:46,324 | shared] Using
+[INFO|2025-02-01 16:06:46,324 | shared] Population size:	8
+[INFO|2025-02-01 16:06:46,324 | shared] Generations:	10
+[INFO|2025-02-01 16:06:46,324 | shared] Crossover rate:	8
+[INFO|2025-02-01 16:06:46,324 | shared] Mutation rate:	0.4
+[INFO|2025-02-01 16:06:46,324 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738422402_hf_qa_pDPOGyf6/train.json
+[INFO|2025-02-01 16:06:46,325 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738422402_hf_qa_pDPOGyf6/val.json
+[INFO|2025-02-01 16:06:46,325 | shared] Writing to /home/simon/Documents/Uni/seminar_prompt_engineering/src/results/1738422402_hf_qa_pDPOGyf6/test.json

@@ -5,5 +5,6 @@ from dotenv import load_dotenv
 dotenv_path = join(dirname(__file__), ".env")
 load_dotenv(dotenv_path)
 
-OPENAI_MODEL= os.environ.get("OPENAI_MODEL")
-OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL")
+UNI_API_KEY= os.environ.get("UNI_API_KEY")
+UNI_MODEL = os.environ.get("UNI_MODEL")
+HF_API_KEY = os.environ.get("HF_API_KEY")
