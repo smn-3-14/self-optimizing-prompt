@@ -23,7 +23,7 @@ def init_dir():
     task = "code" if args["code"] else "qa"
     output_dir = (
         Path(__file__).parent
-        / "results"
+        / "output"
         / (
             str(int(time.time()))
             + f"_{api}_{task}_"
@@ -55,13 +55,13 @@ def main():
     if args["code"]:
         if args["baseline"]:
             coding.base_line()
-        # coding.run()
-        # coding.run_final()
+        coding.run()
+        coding.run_final()
     else:
         if args["baseline"]:
             multiple_choice.base_line()
-        # multiple_choice.run()
-        # multiple_choice.run_final()
+        multiple_choice.run()
+        multiple_choice.run_final()
 
 
 if __name__ == "__main__":
